@@ -38,8 +38,8 @@ const App = (props: AppProps) => {
 				{/*  //! I need to review private wrapper setup */}
 				<Route path='/' element={<PrivateWrapper />} >
 
-					<Route path='/books/new' element={<NewBook />} />
-					<Route path='/books/new' element={<Update />} />
+					<Route path='books/new' element={<NewBook />} />
+					<Route path='books/:id/update' element={<Update />} />
 				</Route >
 
 
