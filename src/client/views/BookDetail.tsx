@@ -12,7 +12,7 @@ const BookDetail = () => {
     const book_id = params.id
 
 
-    console.log(book_id);
+    // console.log(book_id);
     const nav = useNavigate();
 
 
@@ -51,6 +51,24 @@ const BookDetail = () => {
 
     if (!book || !category) { return <> Loading...</> }
 
+    const handleDeleteButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+
+        e.preventDefault();
+
+        if (confirm('are you sure?')) {
+
+            APIService(`/api/books/${book_id}`, 'DELETE')
+                .then(data => {
+                    alert('Deleted book!')
+                    nav(`/books`)
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+        }
+
+    }
+
 
 
 
@@ -70,6 +88,7 @@ const BookDetail = () => {
                                 currency: 'USD',
                             })}.</p>
                             <button onClick={() => nav(-1)} className="row btn btn-primary m-2">Go Back </button>
+                            <button onClick={handleDeleteButton} className="row btn btn-primary m-2">Delete </button>
                             <Link to={`/books/${book_id}/update`} className="row btn btn-warning m-2">Edit </Link>
                         </div>
                     </div>

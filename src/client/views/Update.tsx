@@ -15,7 +15,7 @@ const Update = () => {
     const [bookAuthor, setBookAuthor] = useState('')
     const [bookPrice, setBookPrice] = useState<number>()
     const [categories, setCategories] = useState<Categories[]>([])
-    const [selectedCategoryId, setSelectedCategoryId] = useState<number>(0)
+    const [selectedCategoryId, setSelectedCategoryId] = useState<number>()
     const [book, setBook] = useState<Books>()
     const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
@@ -36,6 +36,7 @@ const Update = () => {
                     .then(data => {
 
                         setCategories(data);
+                        setSelectedCategoryId(book.categoryid)
                     })
                     .catch(error => {
                         console.log(error);
@@ -108,7 +109,7 @@ const Update = () => {
                                     <select value={selectedCategoryId} onChange={handleCategoryIdSelectUpdate} className='form-control'>
 
 
-                                        <option value={Number(book.categoryid)} >Select a Category </option>
+                                        <option value={0} >Select a Category </option>
 
 
                                         {categories.map(cat => (
@@ -151,6 +152,7 @@ const Update = () => {
 
                                         className="form-control" />
 
+                                    <button onClick={() => nav(-1)} className='row btn btn-success m-2' >Go Back</button>
                                     <button onClick={handleSubmitButton} className='btn btn-primary m-2'>Update book</button>
 
                                 </form>
