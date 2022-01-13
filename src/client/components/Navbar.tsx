@@ -1,8 +1,13 @@
+import e from 'express';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom'
 import { APIService } from '../services/APIService';
 
 const Navbar = () => {
+
+    const nav = useNavigate();
+    const loc = useLocation();
 
     const [isAuthed, setIsAuthed] = useState<boolean>(false)
 
@@ -15,13 +20,22 @@ const Navbar = () => {
                 const tokenStatus = res.message === 'valid'
 
                 setIsAuthed(tokenStatus);
+
             })
             .catch(error => {
+                setIsAuthed(false)
                 console.log(error);
             });
 
-    }, [])
+    }, [loc.pathname])
 
+
+    const handleSignOutButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        alert('you are now signed out')
+        nav('/login');
+    }
 
 
     return (
@@ -36,6 +50,7 @@ const Navbar = () => {
             {isAuthed &&
                 <Link className='btn btn-primary m-2' to='/books/new'>Create book</Link>
             }
+            <button onClick={handleSignOutButton} className='btn btn-primary m-2'>Sign Out</button>
 
         </div>
     )

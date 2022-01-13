@@ -11,8 +11,8 @@ const Update = () => {
 
 
 
-    const [bookTitle, setBookTitle] = useState('')
-    const [bookAuthor, setBookAuthor] = useState('')
+    const [bookTitle, setBookTitle] = useState<string>('')
+    const [bookAuthor, setBookAuthor] = useState<string>('')
     const [bookPrice, setBookPrice] = useState<number>()
     const [categories, setCategories] = useState<Categories[]>([])
     const [selectedCategoryId, setSelectedCategoryId] = useState<number>()
@@ -36,7 +36,10 @@ const Update = () => {
                     .then(data => {
 
                         setCategories(data);
-                        setSelectedCategoryId(book.categoryid)
+                        setSelectedCategoryId(book.categoryid)  // ? placeholder for selectmenu category value
+                        setBookPrice(book.price)
+                        setBookTitle(book.title)
+                        setBookAuthor(book.author)
                     })
                     .catch(error => {
                         console.log(error);

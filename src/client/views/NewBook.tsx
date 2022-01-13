@@ -9,7 +9,7 @@ const NewBook = () => {
 
     const [bookTitle, setBookTitle] = useState('')
     const [bookAuthor, setBookAuthor] = useState('')
-    const [bookPrice, setBookPrice] = useState<number>(null)
+    const [bookPrice, setBookPrice] = useState<number>()
     const [categories, setCategories] = useState<Categories[]>([])
     const [selectedCategoryId, setSelectedCategoryId] = useState<number>(0)
 
@@ -131,7 +131,7 @@ const NewBook = () => {
                                         value={bookPrice}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBookPrice(Number(e.target.value))}
 
-                                        placeholder='text'
+                                        placeholder='book price'
                                         className="form-control" />
 
                                     <button onClick={handleSubmitButton} className='btn btn-primary m-2'>create book</button>
