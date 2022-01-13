@@ -1,20 +1,43 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './views/Home';
+import Login from './views/Login';
+import Register from './views/Register';
 
+// ! I need to review how to set up route syntax
 
 const App = (props: AppProps) => {
-	const [greeting, setGreeting] = useState<string>('');
 
-	
+
 
 	return (
-		<main className="container my-5">
-			<h1 className="text-primary text-center">Hello </h1>
-		</main>
+		<BrowserRouter>
+			<Navbar />
+
+			<Routes>
+
+
+				{/* public view */}
+				{/* private view */}
+
+
+				<Route element={<Home />}>  </Route>
+				<Route element={<Register />}>  </Route>
+				<Route element={<Login />}>  </Route>
+
+
+
+
+
+
+			</Routes>
+		</BrowserRouter>
 	);
 };
 
-interface AppProps {}
+interface AppProps { }
 
 
 
