@@ -1,3 +1,4 @@
+// ✅ OK
 import * as express from 'express';
 import categoriesDB from '../../database/queries/categories'
 import { tokenCheck } from '../../middleware/tokenCheck.mw';
