@@ -7,19 +7,28 @@ import { APIService } from '../services/APIService';
 
 const BookDetail = () => {
 
-    const book_id = useParams();
+    // ! got stuck here lol // // *tk
+    let params = useParams();
+    const book_id = params.id
+
+
+    console.log(book_id);
     const nav = useNavigate();
+
 
 
     const [book, setBook] = useState<Books>()
     const [category, setCategory] = useState<Categories>()
+    const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
     useEffect(() => {
 
         APIService(`/api/books/${book_id}`)
+
             .then(data => {
 
                 setBook(data);
+                setIsLoaded(true)
 
                 APIService(`/api/categories/${book.categoryid}`)
                     .then(data => {
@@ -38,9 +47,7 @@ const BookDetail = () => {
 
 
 
-
-
-    }, [])
+    }, [isLoaded])
 
     if (!book || !category) { return <> Loading...</> }
 
@@ -53,12 +60,15 @@ const BookDetail = () => {
 
             <div className="row justify-content-center m-2">
                 <div className="col-md-6">
-                    <h1>{ }</h1>
+                    <h1>{book.title}</h1>
                     <div className="card shadow">
                         <div className="card-body">
-                            <h5 className="card-title">Card title</h5>
-                            <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <h5 className="card-title">{category.name}</h5>
+                            <h6 className="card-subtitle mb-2 text-muted">{book.author} subtitle</h6>
+                            <p className="card-text">price: {book.price.toLocaleString('en-US', {
+                                style: 'currency',
+                                currency: 'USD',
+                            })}.</p>
                             <button onClick={() => nav(-1)} className="row btn btn-primary m-2">Go Back </button>
                             <Link to={`/books/${book_id}/update`} className="row btn btn-warning m-2">Edit </Link>
                         </div>

@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
     const id = Number(req.params.id);
 
     try {
-        const one_book = await booksDB.get_one_by_id(id);
+        const [one_book] = await booksDB.get_one_by_id(id);
 
         //does user exist check? if/else
         if (!one_book) {
