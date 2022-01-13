@@ -28,7 +28,7 @@ const Books = () => {
 
     return (
         <div>
-            <h1 className="text-primary text-center">Book Detail </h1>
+            <h1 className="text-primary text-center">Book Listing </h1>
 
 
         </div>
