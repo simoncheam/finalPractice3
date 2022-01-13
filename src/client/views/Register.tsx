@@ -5,11 +5,9 @@ import { APIService } from '../services/APIService'
 const Register = () => {
     const nav = useNavigate();
 
-
     const [userName, setUserName] = useState('')
     const [userEmail, setUserEmail] = useState('')
     const [userPassword, setUserPassword] = useState('')
-
 
 
     const handleSubmitButton = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -27,7 +25,7 @@ const Register = () => {
                 alert('Welcome!')
 
                 localStorage.setItem('token', data.token)
-                nav(`/create`)
+                nav(`/books`)
 
             })
             .catch(e => {
