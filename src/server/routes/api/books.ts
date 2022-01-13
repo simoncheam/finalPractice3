@@ -8,8 +8,41 @@ const router = express.Router();
 
 //get all books JOINED
 
+router.get('/', async (req, res) => {
+
+    try {
+        const all_books = await booksDB.get_all_joined();
+
+        res.status(200).json(all_books);
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "A server errors occurred", error: error.sqlMessage });
+    }
+
+})
+
 
 //get one book by id
+router.get('/:id', async (req, res) => {
+
+    const id = Number(req.params.id);
+
+    try {
+        const one_book = await booksDB.get_one_by_id(id);
+
+        //does user exist check? if/else
+        if (!one_book) {
+            res.status(400).json({ message: "Book does not exist" })
+        }
+        res.status(200).json(one_book);
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "A server errors occurred", error: error.sqlMessage });
+    }
+})
 
 
 
@@ -28,7 +61,7 @@ router.post('/', async (req, res) => {
 
 
     try {
-        const newbookResults = await booksDB.create(title, author, price, categoryid);
+        const newbookResults = await booksDB.create({ title, author, price, categoryid });
         res.status(200).json({ message: 'book added', newbookResults });
 
 
@@ -46,8 +79,11 @@ router.put('/:id', async (req, res) => {
     try {
         const id = Number(req.params.id);
 
+        const { title, author, price, categoryid } = req.body;
 
-        const bookUpdateResults = await booksDB.update(id);
+
+
+        const bookUpdateResults = await booksDB.update({ title, author, price, categoryid }, id);
 
         if (bookUpdateResults.affectedRows) {
 
