@@ -21,7 +21,7 @@ const create = (new_book: Books) => {
 
 
 //delete
-const destroy = (id: Books['id']) => Query("DELETE FROM Books WHERE id=?", [id]); // *tk remove userid from template
+const destroy = (id: Books['id']) => Query("DELETE FROM Books WHERE id=?", [id]);
 
 
 
