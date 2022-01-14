@@ -54,6 +54,26 @@ const Update = () => {
     }, [isLoaded])
 
 
+    const handleDeleteButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+
+        e.preventDefault();
+
+        if (confirm('are you sure?')) {
+
+            APIService(`/api/books/${book_id}`, 'DELETE')
+                .then(data => {
+                    alert('Deleted book!')
+                    nav(`/books`)
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+        }
+
+    }
+
+
+
     const handleCategoryIdSelectUpdate = (e: React.ChangeEvent<HTMLSelectElement>) => {
         e.preventDefault();
 
@@ -155,8 +175,10 @@ const Update = () => {
 
                                         className="form-control" />
 
-                                    <button onClick={() => nav(-1)} className='row btn btn-success m-2' >Go Back</button>
-                                    <button onClick={handleSubmitButton} className='btn btn-primary m-2'>Update book</button>
+                                    <button onClick={() => nav(-1)} className='row btn btn-primary m-2' >Go Back</button>
+                                    <button onClick={handleDeleteButton} className="row btn btn-danger m-2">Delete </button>
+
+                                    <button onClick={handleSubmitButton} className='btn btn-success m-2'>Update book</button>
 
                                 </form>
                             </div>

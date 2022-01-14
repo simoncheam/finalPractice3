@@ -50,8 +50,10 @@ const Navbar = () => {
             {isAuthed &&
                 <Link className='btn btn-primary m-2' to='/books/new'>Create book</Link>
             }
-            <button onClick={handleSignOutButton} className='btn btn-primary m-2'>Sign Out</button>
+            {isAuthed &&
 
+                <button onClick={handleSignOutButton} className='btn btn-primary m-2'>Sign Out</button>
+            }
         </div>
     )
 }
